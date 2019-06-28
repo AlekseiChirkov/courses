@@ -7,8 +7,6 @@ class Category(models.Model):
     def __str__(self):
         return str(self.name)
 
-
-
 class Course(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
@@ -27,10 +25,16 @@ class Branch(models.Model):
     def __str__(self):
         return str(self.address)
 
+class ContactValue(models.Model):
+    type = models.CharField(max_length=64)
+
+    def __str__(self):
+        return str(self.name)
+
 class Contact(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="contacts")
     type = models.IntegerField()
-    value = models.TextField()
+    value = models.ForeignKey(ContactValue, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.type)
