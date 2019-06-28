@@ -25,8 +25,8 @@ class Branch(models.Model):
     def __str__(self):
         return str(self.address)
 
-class Value(models.Model):
-    name = models.CharField(max_length=32)
+class ContactValue(models.Model):
+    type = models.CharField(max_length=64)
 
     def __str__(self):
         return str(self.name)
@@ -34,7 +34,7 @@ class Value(models.Model):
 class Contact(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="contacts")
     type = models.IntegerField()
-    value = models.ForeignKey(Value, on_delete=models.CASCADE)
+    value = models.ForeignKey(ContactValue, on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.type)

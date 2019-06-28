@@ -3,9 +3,9 @@ from rest_framework import viewsets, generics
 from .models import *
 from .serializers import *
 
-class ValueView(viewsets.ModelViewSet):
-    queryset = Value.objects.all()
-    serializer_class = ValueSerializer
+class ContactValueView(viewsets.ModelViewSet):
+    queryset = ContactValue.objects.all()
+    serializer_class = ContactValueSerializer
 
 class CourseView(viewsets.ModelViewSet):
     queryset = Course.objects.all()
