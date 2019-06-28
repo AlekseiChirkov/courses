@@ -25,16 +25,18 @@ class Branch(models.Model):
     def __str__(self):
         return str(self.address)
 
-class ContactValue(models.Model):
-    type = models.CharField(max_length=64)
-
-    def __str__(self):
-        return str(self.name)
-
 class Contact(models.Model):
+    phone = "PHONE"
+    facebook = "FACEBOOK"
+    email = "EMAIL"
+    contact_choices = [
+        (phone, "PHONE"),
+        (facebook, "FACEBOOK"),
+        (email, "EMAIL")
+    ]
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="contacts")
-    type = models.IntegerField()
-    value = models.ForeignKey(ContactValue, on_delete=models.CASCADE)
+    type = models.CharField(max_length=64, choices=contact_choices, default='')
+    value = models.CharField(max_length=64, default='')
 
     def __str__(self):
         return str(self.type)

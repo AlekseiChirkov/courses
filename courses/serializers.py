@@ -11,11 +11,6 @@ class BranchSerializer(serializers.ModelSerializer):
         model = Branch
         fields = ('address', 'latitude', 'longitude')
 
-class ContactValueSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ContactValue
-        fields = ('id', 'type')
-
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
