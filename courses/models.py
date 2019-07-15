@@ -10,7 +10,7 @@ class Category(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     logo = models.TextField()
 
     def __str__(self):
