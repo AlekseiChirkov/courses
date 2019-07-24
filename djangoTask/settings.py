@@ -81,23 +81,24 @@ WSGI_APPLICATION = 'djangoTask.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-}
-
-# DATABASES = {
-#     'default':  {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'djangoTask',
-#         'USER': 'postgres',
-#         'PASSWORD': config('DB_PASS'),
-#         'PORT': '5432'
-#         'HOST': '127.0.0.1',
-#     }
-# }
+DEPLOY = False
+if DEPLOY:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
+else:
+    DATABASES = {
+        'default':  {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'djangoTask',
+            'USER': 'postgres',
+            'PASSWORD': config('DB_PASS'),
+            'PORT': '5432',
+            'HOST': '127.0.0.1',
+        }
+    }
 
 
 # Password validation
