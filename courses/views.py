@@ -3,6 +3,10 @@ from rest_framework import viewsets, generics
 from .models import *
 from .serializers import *
 
+class BranchView(viewsets.ModelViewSet):
+    queryset = Branch.objects.all()
+    serializer_class = BranchSerializer
+
 class ContactView(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer

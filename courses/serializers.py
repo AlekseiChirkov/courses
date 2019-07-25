@@ -4,7 +4,7 @@ from .models import *
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'imgpath')
 
 class BranchSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,6 +19,7 @@ class ContactSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     branches = BranchSerializer(many=True, required=False)
     contacts = ContactSerializer(many=True, required=False)
+    category = CategorySerializer(many=True, required=False)
     class Meta:
         model = Course
         fields = [
@@ -34,11 +35,14 @@ class CourseSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         branches_data = validated_data.pop('branches')
         contacts_data = validated_data.pop('contacts')
+        category_data = validated_data.pop('category')
         course = Course.objects.create(**validated_data)
         branches_list = []
+        category_list = []
         contacts_list = []
         print(contacts_data)
         print(branches_data)
+        print(category_data)
         for branches_details in branches_data:
             branches_list.append(Branch.objects.create(
             course_id = course.id,
@@ -47,5 +51,9 @@ class CourseSerializer(serializers.ModelSerializer):
             contacts_list.append(Contact.objects.create(
             course_id = course.id,
             **contacts_details))
+        for category_details in category_data:
+            category_list.append(Category.objects.create(
+            course_id = course.id,
+            **category_details))
         course.save()
         return course
